@@ -35,7 +35,7 @@ module.exports = class extends Generator {
   prompting() {
     var self = this;
 
-    this.log(chalk.gray('Let\'s get started...'));
+    this.log(chalk.gray('Let\'s get started with your new ' + chalk.yellow('React component') + '...'));
     this.log('');
 
     var prompts = [
