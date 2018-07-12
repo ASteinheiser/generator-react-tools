@@ -1,11 +1,8 @@
 {
   "name": "generator-react-tools",
   "version": "1.0.0",
-  "description": "Yeoman generator for React.js and react-native components",
+  "description": "Yeoman generator for React.js and React Native components",
   "main": "index.js",
-  "scripts": {
-    "test": "npm test"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ASteinheiser/generator-react-tools.git"
@@ -14,7 +11,9 @@
     "generators"
   ],
   "keywords": [
-    "yeoman"
+    "yeoman",
+    "react",
+    "react-native"
   ],
   "author": "Andrew Steinheiser",
   "license": "ISC",
