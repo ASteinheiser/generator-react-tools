@@ -5,6 +5,8 @@
 ## Install
 ```
 npm install -g yo generator-react-tools
+
+yo react-tools --help
 ```
 ## Create React.js component
 ```
