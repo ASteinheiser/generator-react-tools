@@ -25,7 +25,8 @@ yo react-tools:native
 # Features
 - Tests with [Jest](https://jestjs.io/) and [Enzyme](https://github.com/airbnb/enzyme)
 - package.json for cleaner import
-- Ready to style with [CSS](https://css-tricks.com/almanac/)
+- React.js styling with [CSS](https://css-tricks.com/almanac/) file
+- React Native styling with [styled-components/native](https://github.com/styled-components/styled-components)
 
 # Component Structure
 ```

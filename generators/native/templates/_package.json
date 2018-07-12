@@ -1,0 +1,4 @@
+{
+  "name": "<%= componentName %>",
+  "main": "<%= componentName %>.js"
+}
