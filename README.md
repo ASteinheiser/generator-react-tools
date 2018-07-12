@@ -14,6 +14,11 @@ yo react-tools
 ```
 yo react-tools:native
 ```
+## Options
+```
+--dumb  // creates a component with no state
+--camel // camelCases the file names
+```
 
 # Features
 - Tests with [Jest](https://jestjs.io/) and [Enzyme](https://github.com/airbnb/enzyme)
