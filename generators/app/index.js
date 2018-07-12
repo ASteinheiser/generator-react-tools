@@ -3,10 +3,19 @@ var _camelCase = require('lodash.camelcase');
 var _kebabCase = require('lodash.kebabcase');
 var Generator  = require('yeoman-generator');
 
+function template(input, output, context) {
+  this.fs.copyTpl(
+    this.templatePath(input),
+    this.destinationPath(output),
+    context
+  );
+}
+
 module.exports = class extends Generator {
 
   constructor(args, opts) {
     super(args, opts);
+    template = template.bind(this);
     // define options
     this.option('dumb');
     this.option('camel');
@@ -38,29 +47,33 @@ module.exports = class extends Generator {
       }
     ];
     return this.prompt(prompts).then(function (answers) {
-
       self.componentName = _kebabCase(answers.componentName);
+      var camelCased = _camelCase(answers.componentName);
+      self.componentNameCamel = camelCased.charAt(0).toUpperCase() + camelCased.slice(1);
 
       if (self.options.camel) {
-        var camelCased = _camelCase(answers.componentName);
-        self.componentName = camelCased.charAt(0).toUpperCase() + camelCased.slice(1);
+        self.componentName = self.componentNameCamel;
       }
-      self.log('');
-      self.log(chalk.gray('Creating component: ') + chalk.green(self.componentName) + chalk.gray('...'));
-      self.log('');
     });
   }
 
-  // writing() {
-  //   this.composeWith('zooid:component', {
-  //     args: [this.zooidName]
-  //   },
-  //   {
-  //     local: require.resolve('../component')
-  //   });
-  //   var context = {
-  //     zooidName: this.zooidName,
-  //   }
-  //   this.template('src/_index.js', 'src/index.js', context);
-  // }
+  writing() {
+    this.log('');
+    this.log(chalk.gray('Creating ') + chalk.yellow(this.options.dumb ? 'Dumb' : 'Smart') + chalk.gray(' component: ') + chalk.green(this.componentName) + chalk.gray('...'));
+    this.log('');
+
+    var context = {
+      componentName: this.componentName,
+      componentNameCamel: this.componentNameCamel
+    };
+
+    if (this.options.dumb) {
+      template('_index-dumb.js', this.componentName + '/' + this.componentName + '.js', context);
+    } else {
+      template('_index.js', this.componentName + '/' + this.componentName + '.js', context);
+    }
+    template('_index.test.js', this.componentName + '/' + this.componentName + '.test.js', context);
+    template('_index.css', this.componentName + '/' + this.componentName + '.css', context);
+    template('_package.json', this.componentName + '/package.json', context);
+  }
 };
